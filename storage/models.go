@@ -49,14 +49,16 @@ func (url *URL) AddTechnologie(value string) {
 
 // MarshallCSV returns values as a slice
 func (url *URL) MarshallCSV() (res []string) {
-	return []string{url.URL,
+	return []string{
+		url.URL,
 		url.FinalURL,
 		strconv.Itoa(url.ResponseCode),
 		url.ResponseReason,
 		url.Proto,
 		strconv.Itoa(int(url.ContentLength)),
 		url.Title,
-		url.Filename}
+		url.Filename,
+	}
 }
 
 // MarshallJSON returns values as a slice

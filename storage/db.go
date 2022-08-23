@@ -23,12 +23,11 @@ func NewDb() *Db {
 
 // Get gets a db handle
 func (db *Db) Get() (*gorm.DB, error) {
-
 	if db.Disabled {
 		return nil, nil
 	}
 
-	var config = &gorm.Config{}
+	config := &gorm.Config{}
 	if db.Debug {
 		config.Logger = logger.Default.LogMode(logger.Info)
 	} else {

@@ -87,7 +87,6 @@ func NewChrome() *Chrome {
 
 // Preflight will preflight a url
 func (chrome *Chrome) Preflight(url *url.URL) (result *PreflightResult, err error) {
-
 	// init a new preflight result
 	result = &PreflightResult{}
 
@@ -155,7 +154,6 @@ func (chrome *Chrome) Preflight(url *url.URL) (result *PreflightResult, err erro
 
 // StoreRequest will store request info to the DB
 func (chrome *Chrome) StoreRequest(db *gorm.DB, preflight *PreflightResult, screenshot *ScreenshotResult, filename string) (uint, error) {
-
 	record := &storage.URL{
 		URL:            preflight.URL.String(),
 		DOM:            screenshot.DOM,
@@ -230,9 +228,9 @@ func (chrome *Chrome) StoreRequest(db *gorm.DB, preflight *PreflightResult, scre
 
 // Screenshot takes a screenshot of a URL, optionally saving network and console events.
 // Ref:
-// 	https://github.com/chromedp/examples/blob/255873ca0d76b00e0af8a951a689df3eb4f224c3/screenshot/main.go
+//
+//	https://github.com/chromedp/examples/blob/255873ca0d76b00e0af8a951a689df3eb4f224c3/screenshot/main.go
 func (chrome *Chrome) Screenshot(url *url.URL) (result *ScreenshotResult, err error) {
-
 	// prepare a new screenshotResult
 	result = &ScreenshotResult{}
 
@@ -463,9 +461,9 @@ func buildTasks(chrome *Chrome, url *url.URL, doNavigate bool, buf *[]byte, dom 
 
 // initalize the headers Map. we do this given the format chromedp wants
 // Ref:
-// 	https://github.com/chromedp/examples/blob/master/headers/main.go
+//
+//	https://github.com/chromedp/examples/blob/master/headers/main.go
 func (chrome *Chrome) PrepareHeaderMap() {
-
 	if len(chrome.Headers) <= 0 {
 		return
 	}

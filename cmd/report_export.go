@@ -57,7 +57,7 @@ specified will be the target for the final ZIP file that will be created.
 		log.Debug().Str("tempdir", tempDir).Msg("created temp working directory")
 
 		// create the screenshots directory
-		if err := os.MkdirAll(tempDir+"/screenshots", 0755); err != nil {
+		if err := os.MkdirAll(tempDir+"/screenshots", 0o755); err != nil {
 			log.Fatal().Err(err).Msg("could not create screenshots directory")
 		}
 		screenshotDir := tempDir + "/screenshots"
@@ -82,7 +82,6 @@ specified will be the target for the final ZIP file that will be created.
 			}
 
 			return nil
-
 		}); err != nil {
 			log.Fatal().Str("screenshot-path", options.ScreenshotPath).Err(err).Msg("could not walk screenshot path and copy screenshots")
 		}
@@ -155,7 +154,6 @@ specified will be the target for the final ZIP file that will be created.
 			}
 
 			return nil
-
 		}); err != nil {
 			log.Fatal().Str("target-file", options.File).Err(err).Msg("failed to create report archive")
 		}
@@ -174,7 +172,6 @@ func init() {
 
 // copyFile well, copies a file
 func copyFile(from string, to string) error {
-
 	s, err := os.Open(from)
 	if err != nil {
 		return err

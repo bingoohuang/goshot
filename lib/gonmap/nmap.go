@@ -298,8 +298,10 @@ type Sequence struct {
 	Class  string `xml:"class,attr" json:"class"`
 	Values string `xml:"values,attr" json:"values"`
 }
-type IpIdSequence Sequence
-type TcpTsSequence Sequence
+type (
+	IpIdSequence  Sequence
+	TcpTsSequence Sequence
+)
 
 // Trace contains the hops to a Host.
 type Trace struct {

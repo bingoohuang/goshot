@@ -32,7 +32,6 @@ type Pagination struct {
 
 // Page pages a dataset
 func (p *Pagination) Page(data interface{}) (*PaginationPage, error) {
-
 	var pagination PaginationPage
 	var count int64
 	var offset int

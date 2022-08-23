@@ -76,7 +76,6 @@ func init() {
 
 // outputJSON prints the report in JSON format
 func outputJSON(d *[]storage.URL) {
-
 	for _, l := range *d {
 		bytes, _ := l.MarshallJSON()
 		fmt.Print(string(bytes))
@@ -85,7 +84,6 @@ func outputJSON(d *[]storage.URL) {
 
 // outputCSV prints the report in CSV format
 func outputCSV(d *[]storage.URL) {
-
 	wr := csv.NewWriter(os.Stdout)
 	for _, l := range *d {
 		wr.Write(l.MarshallCSV())
@@ -95,7 +93,6 @@ func outputCSV(d *[]storage.URL) {
 
 // outputTable prints the output to stdout in table format
 func outputTable(d *[]storage.URL) {
-
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAutoFormatHeaders(false)
 	table.SetAutoWrapText(false)

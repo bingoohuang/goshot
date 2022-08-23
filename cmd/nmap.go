@@ -2,10 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/sensepost/gowitness/lib/gonmap"
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/sensepost/gowitness/lib/gonmap"
 
 	"github.com/remeh/sizedwaitgroup"
 	"github.com/sensepost/gowitness/lib"
@@ -130,7 +131,6 @@ func init() {
 // getNmapURLs generates url's from an nmap xml file based on options
 // this function considers many of the flag combinations
 func getNmapURLs() (urls []string, err error) {
-
 	xml, err := os.ReadFile(options.NmapFile)
 	if err != nil {
 		return
@@ -188,7 +188,6 @@ func getNmapURLs() (urls []string, err error) {
 
 // buildURI will build urls taking the http/https options int account
 func buildURI(hostname string, port int) (r []string) {
-
 	if !options.NoHTTP {
 		r = append(r, fmt.Sprintf(`http://%s:%d`, hostname, port))
 	}

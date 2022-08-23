@@ -17,9 +17,7 @@ type Wappalyzer struct {
 // NewWappalyzer returns a new Wappalyzer instance.
 // If an error occured, .error would contain an error()
 func NewWappalyzer() *Wappalyzer {
-
 	c, err := wappalyzer.New()
-
 	// this is a hard error, and probably means the bundled
 	// json from which matches are loaded has an error.
 	// return a null Wappalyzer with an error.
@@ -37,7 +35,6 @@ func NewWappalyzer() *Wappalyzer {
 // Technologies uses wappalyzergo to determine known technologies from headers
 // or an HTTP body
 func (w *Wappalyzer) Technologies(headers http.Header, body []byte) (tech []string) {
-
 	fingerprints := w.client.Fingerprint(headers, body)
 
 	for match := range fingerprints {
@@ -49,7 +46,6 @@ func (w *Wappalyzer) Technologies(headers http.Header, body []byte) (tech []stri
 
 // HTMLTitle returns the title parsed from an HTML <title> tag.
 func (w *Wappalyzer) HTMLTitle(b []byte) string {
-
 	r := bytes.NewReader(b)
 
 	doc, err := html.Parse(r)
@@ -63,7 +59,6 @@ func (w *Wappalyzer) HTMLTitle(b []byte) string {
 }
 
 func (w *Wappalyzer) traverse(n *html.Node) (string, bool) {
-
 	if w.isTitleElement(n) {
 
 		// handle empty <title> node

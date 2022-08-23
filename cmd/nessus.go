@@ -171,12 +171,11 @@ func getNessusURLs() (urls []string, err error) {
 	decoder := xml.NewDecoder(nessusFile)
 
 	// Unique maps to cut down on dupliation within nessus files
-	var nessusIPsMap = make(map[string]int)
-	var nessusHostsMap = make(map[string]int)
+	nessusIPsMap := make(map[string]int)
+	nessusHostsMap := make(map[string]int)
 
 	for {
 		token, err := decoder.Token()
-
 		if err != nil {
 			break
 		}
@@ -262,7 +261,6 @@ func getNessusURLs() (urls []string, err error) {
 
 // buildURI will build urls taking the http/https options int account
 func buildURL(hostname string, port int) (r []string) {
-
 	if !options.NoHTTP {
 		r = append(r, fmt.Sprintf(`http://%s:%d`, hostname, port))
 	}

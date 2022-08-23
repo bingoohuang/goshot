@@ -38,13 +38,12 @@ type Processor struct {
 }
 
 // Gowitness processes a URL by:
-//	- preflighting
-//	- storing
-//	- screenshotting
-//	- calculating a perception hash
-//	- writing a screenshot to disk
+//   - preflighting
+//   - storing
+//   - screenshotting
+//   - calculating a perception hash
+//   - writing a screenshot to disk
 func (p *Processor) Gowitness() (err error) {
-
 	p.init()
 
 	if err = p.preflight(); err != nil {
@@ -119,7 +118,6 @@ func (p *Processor) preflight() (err error) {
 
 // persistRequest dispatches the StorePreflight function
 func (p *Processor) persistRequest() (err error) {
-
 	if p.Db == nil {
 		return
 	}
@@ -146,7 +144,6 @@ func (p *Processor) takeScreenshot() (err error) {
 
 // storePerceptionHash calculates and stores a perception hash
 func (p *Processor) storePerceptionHash() (err error) {
-
 	if p.Db == nil {
 		return
 	}
@@ -177,9 +174,8 @@ func (p *Processor) storePerceptionHash() (err error) {
 
 // writeScreenshot writes the screenshot buffer to disk
 func (p *Processor) writeScreenshot() (err error) {
-
 	p.Logger.Debug().Str("url", p.URL.String()).Str("path", p.fp).Msg("saving screenshot buffer")
-	if err = ioutil.WriteFile(p.fp, p.screenshotResult.Screenshot, 0644); err != nil {
+	if err = ioutil.WriteFile(p.fp, p.screenshotResult.Screenshot, 0o644); err != nil {
 		return
 	}
 

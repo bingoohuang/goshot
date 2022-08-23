@@ -52,7 +52,6 @@ $ gowitness merge -i gowitness.sqlite3 --input-path dbs/ --output merged.sqlite3
 		dstDB := storage.NewDb()
 		dstDB.Path = options.MergeOutputDB
 		dstDBConn, err := dstDB.Get()
-
 		if err != nil {
 			log.Fatal().Err(err).Str("destination", options.MergeOutputDB).
 				Msg("could not open destination db")
@@ -79,13 +78,11 @@ func init() {
 
 // readDirDbs reads a directory, scanning for sqlite databases
 func readDirDbs() error {
-
 	if options.MergeSourcePath == "" {
 		return nil
 	}
 
 	if err := filepath.Walk(options.MergeSourcePath, func(path string, _ os.FileInfo, err error) error {
-
 		// todo: add option to do non-recursive walking
 
 		// check that the file at least _looks_ like a sqlite db
@@ -112,7 +109,6 @@ func readDirDbs() error {
 // mergeFromPath will read a sqlite db specified by a path, populate
 // the results into a db handle
 func mergeFromPath(source string, dst *gorm.DB) error {
-
 	log := options.Logger
 
 	srcDB := storage.NewDb()
@@ -120,7 +116,6 @@ func mergeFromPath(source string, dst *gorm.DB) error {
 	srcDB.SkipMigration = true
 
 	db, err := srcDB.Get()
-
 	if err != nil {
 		return err
 	}

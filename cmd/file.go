@@ -111,7 +111,6 @@ func getScanner(i string) (*bufio.Scanner, *os.File, error) {
 // getUrls generates urls for an incoming target depending
 // on wether the target has an http prefix and the flags set
 func getUrls(target string) (c []*url.URL) {
-
 	// if there already is a protocol, just parse and add that
 	if strings.HasPrefix(target, "http") {
 		u, err := url.Parse(target)

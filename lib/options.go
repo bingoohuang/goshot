@@ -72,9 +72,8 @@ func NewOptions() *Options {
 
 // PrepareScreenshotPath prepares the path to save screenshots in
 func (opt *Options) PrepareScreenshotPath() error {
-
 	if _, err := os.Stat(opt.ScreenshotPath); os.IsNotExist(err) {
-		if err = os.Mkdir(opt.ScreenshotPath, 0750); err != nil {
+		if err = os.Mkdir(opt.ScreenshotPath, 0o750); err != nil {
 			return err
 		}
 	}

@@ -12,7 +12,6 @@ import (
 
 // ScreenshotPath determines a full path and file name for a screenshot image
 func ScreenshotPath(destination string, url *url.URL, path string) string {
-
 	var fname, dst string
 
 	if destination == "" {
@@ -32,7 +31,6 @@ func ScreenshotPath(destination string, url *url.URL, path string) string {
 
 // SafeFileName return a safe string that can be used in file names
 func SafeFileName(str string) string {
-
 	name := strings.ToLower(str)
 	name = strings.Trim(name, " ")
 
@@ -55,10 +53,9 @@ func SafeFileName(str string) string {
 
 // PortsFromString returns a slice of ports parsed from a string
 func PortsFromString(ports string) ([]int, error) {
-
 	parsed := strings.Split(ports, ",")
 
-	var m = make(map[int]bool)
+	m := make(map[int]bool)
 	var r []int
 
 	for _, port := range parsed {
@@ -82,7 +79,6 @@ func PortsFromString(ports string) ([]int, error) {
 
 // HostsInCIDR returns the IP's from a provided CIDR
 func HostsInCIDR(cidr string) (ips []string, err error) {
-
 	_, ipnet, err := net.ParseCIDR(cidr)
 	if err != nil {
 		return nil, err
@@ -126,7 +122,6 @@ func SliceContainsString(s []string, e string) bool {
 
 // TruncateString truncates a string for l characters
 func TruncateString(s string, l int) string {
-
 	if len(s) <= l {
 		return s
 	}

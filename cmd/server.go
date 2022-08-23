@@ -140,7 +140,6 @@ func getTheme() string {
 // themeChooser is a middleware to set the theme to use in the base template
 func themeChooser(choice *string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-
 		// parse the query string as preference. this will indicate a theme switch
 		q := c.Query("theme")
 		if q == "light" {
@@ -193,7 +192,6 @@ func themeChooser(choice *string) gin.HandlerFunc {
 
 // dashboardHandler handles dashboard requests
 func dashboardHandler(c *gin.Context) {
-
 	// get the sqlite db size
 	var size int64
 	rsDB.Raw("SELECT page_count * page_size as size FROM pragma_page_count(), pragma_page_size();").Take(&size)
@@ -232,7 +230,6 @@ func getSubmitHandler(c *gin.Context) {
 
 // submitHandler handles url submissions
 func submitHandler(c *gin.Context) {
-
 	// prepare target
 	url, err := url.Parse(strings.TrimSpace(c.PostForm("url")))
 	if err != nil {
@@ -285,7 +282,7 @@ func submitHandler(c *gin.Context) {
 		}
 	}
 
-	if err := ioutil.WriteFile(fp, result.Screenshot, 0644); err != nil {
+	if err := ioutil.WriteFile(fp, result.Screenshot, 0o644); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status":  "error",
 			"message": err.Error(),
@@ -303,7 +300,6 @@ func submitHandler(c *gin.Context) {
 
 // detailHandler gets all of the details for a particular url id
 func detailHandler(c *gin.Context) {
-
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -377,7 +373,6 @@ func detailDOMDownloadHandler(c *gin.Context) {
 
 // tableHandler handles the URL table view
 func tableHandler(c *gin.Context) {
-
 	var urls []storage.URL
 	rsDB.Preload("Network").Preload("Console").Preload("Technologies").Find(&urls)
 
@@ -388,7 +383,6 @@ func tableHandler(c *gin.Context) {
 
 // galleryHandler handles the index page. this is the main gallery view
 func galleryHandler(c *gin.Context) {
-
 	currPage, limit, err := getPageLimit(c)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -426,7 +420,6 @@ func galleryHandler(c *gin.Context) {
 
 // searchHandler handles report searching
 func searchHandler(c *gin.Context) {
-
 	query := c.PostForm("search_query")
 
 	if query == "" {
@@ -496,7 +489,6 @@ func searchHandler(c *gin.Context) {
 
 // getPageLimit gets the limit and page query string values from a request
 func getPageLimit(c *gin.Context) (page int, limit int, err error) {
-
 	pageS := strings.TrimSpace(c.Query("page"))
 	limitS := strings.TrimSpace(c.Query("limit"))
 
@@ -524,7 +516,6 @@ func getPageLimit(c *gin.Context) (page int, limit int, err error) {
 
 // apiURLHandler returns the list of URLS in the database
 func apiURLHandler(c *gin.Context) {
-
 	// use gorm SmartSelect Fields to filter URL
 	type apiURL struct {
 		ID           uint64
@@ -542,7 +533,6 @@ func apiURLHandler(c *gin.Context) {
 
 // apiDetailHandler handles a detail request for screenshot information
 func apiDetailHandler(c *gin.Context) {
-
 	var url storage.URL
 	rsDB.
 		Preload("Headers").
@@ -587,7 +577,6 @@ func apiDetailScreenshotHandler(c *gin.Context) {
 
 // apiScreenshot takes a screenshot of a URL
 func apiScreenshotHandler(c *gin.Context) {
-
 	type Request struct {
 		URL     string   `json:"url"`
 		Headers []string `json:"headers"`

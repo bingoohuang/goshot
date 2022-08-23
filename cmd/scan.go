@@ -133,7 +133,6 @@ func init() {
 
 // getScanPorts determines all of the ports to use
 func getScanPorts() ([]int, error) {
-
 	portString := options.ScanPorts
 	if !strings.HasSuffix(portString, ",") {
 		portString += ","
@@ -160,7 +159,6 @@ func getScanPorts() ([]int, error) {
 // getScanCidrIps returns a slice of all of the ips
 // in a scan
 func getScanCidrIps() (ips []string, err error) {
-
 	var cidrs []string
 	cidrs = append(cidrs, options.ScanCidr...)
 
@@ -200,7 +198,6 @@ func getScanCidrIps() (ips []string, err error) {
 // too.
 // todo: add uri appending support like we had in v1
 func getScanPermutations(ips *[]string, ports *[]int) (results []string, err error) {
-
 	for _, ip := range *ips {
 		for _, port := range *ports {
 
