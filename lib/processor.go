@@ -3,8 +3,8 @@ package lib
 import (
 	"bytes"
 	"image/png"
-	"io/ioutil"
 	"net/url"
+	"os"
 
 	"github.com/corona10/goimagehash"
 	"github.com/rs/zerolog"
@@ -85,7 +85,7 @@ func (p *Processor) init() {
 	// limit filename length
 	p.fn = TruncateString(p.fn, 30)
 
-	// set the extention depending on the screenshot format
+	// set the extension depending on the screenshot format
 	if p.Chrome.AsPDF {
 		p.fn = p.fn + ".pdf"
 	} else {
@@ -135,11 +135,8 @@ func (p *Processor) takeScreenshot() (err error) {
 	p.Logger.Debug().Str("url", p.URL.String()).Msg("screenshotting")
 
 	p.screenshotResult, err = p.Chrome.Screenshot(p.URL)
-	if err != nil {
-		return
-	}
 
-	return
+	return err
 }
 
 // storePerceptionHash calculates and stores a perception hash
@@ -175,7 +172,7 @@ func (p *Processor) storePerceptionHash() (err error) {
 // writeScreenshot writes the screenshot buffer to disk
 func (p *Processor) writeScreenshot() (err error) {
 	p.Logger.Debug().Str("url", p.URL.String()).Str("path", p.fp).Msg("saving screenshot buffer")
-	if err = ioutil.WriteFile(p.fp, p.screenshotResult.Screenshot, 0o644); err != nil {
+	if err = os.WriteFile(p.fp, p.screenshotResult.Screenshot, 0o644); err != nil {
 		return
 	}
 
