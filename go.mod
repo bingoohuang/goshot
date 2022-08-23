@@ -20,7 +20,6 @@ require (
 	github.com/rivo/uniseg v0.3.1 // indirect
 	github.com/rs/zerolog v1.27.0
 	github.com/spf13/cobra v1.5.0
-	github.com/tomsteele/go-nmap v0.0.0-20191202052157-3507e0b03523
 	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa // indirect
 	golang.org/x/net v0.0.0-20220728211354-c7608f3a8462
 	golang.org/x/sys v0.0.0-20220730100132-1609e554cd39 // indirect

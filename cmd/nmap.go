@@ -2,14 +2,14 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
+	"github.com/sensepost/gowitness/lib/gonmap"
 	"net/url"
+	"os"
 	"strings"
 
 	"github.com/remeh/sizedwaitgroup"
 	"github.com/sensepost/gowitness/lib"
 	"github.com/spf13/cobra"
-	"github.com/tomsteele/go-nmap"
 )
 
 // nmapCmd represents the nmap command
@@ -131,12 +131,12 @@ func init() {
 // this function considers many of the flag combinations
 func getNmapURLs() (urls []string, err error) {
 
-	xml, err := ioutil.ReadFile(options.NmapFile)
+	xml, err := os.ReadFile(options.NmapFile)
 	if err != nil {
 		return
 	}
 
-	nmapXML, err := nmap.Parse(xml)
+	nmapXML, err := gonmap.Parse(xml)
 	if err != nil {
 		return
 	}
